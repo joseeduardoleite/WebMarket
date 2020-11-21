@@ -1,0 +1,36 @@
+﻿@model WebMarket.DTO.EstoqueDTO
+
+@{
+    ViewData["Title"] = "NovoEstoque";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Novo Estoque</h2>
+<hr />
+
+<div class="container">
+
+    <form class="form-horizontal" asp-controller="Estoque" asp-action="Salvar" method="POST">
+        <input type="hidden" asp-for="Id" value="0" />
+
+
+        <div class="form-group">
+            <label for="categoria" asp-for="ProdutoID">Nome do Produto</label>
+            <div class="form-group">
+                <select class="selectpicker form-control" id="categoria" asp-for="ProdutoID" asp-items="@(new SelectList(@ViewBag.Produto,"Id", "Nome"))" data-live-search="true"></select>
+                <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="ProdutoID"></span> </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="quantidade" asp-for="Quantidade">Quantidade</label>
+            <input type="number" asp-for="Quantidade" class="form-control" id="quantidade" step="any" />
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="Quantidade"></span> </small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+
+</div>
+
+

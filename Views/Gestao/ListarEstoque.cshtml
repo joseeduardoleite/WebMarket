@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebMarket.Models.Estoque>
+
+ @{
+      ViewData["Title"] = "ListarEstoque";
+      Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+ }
+
+    <h2>Listar Estoque</h2>
+    <hr />
+    <a asp-action="NovoEstoque" asp-controller="Gestao" class="btn btn-success">Criar novo Estoque</a>
+    <hr />
+
+    <table id="dados" class="table table-striped table-bordered responsive nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome Produto</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var dados in Model)
+            {
+                <tr>
+                    <td>@dados.Id</td>
+                    <td>@dados.Produto.Nome</td>
+                    <td>@dados.Quantidade</td>
+                    <td>
+                        <a class="btn btn-primary" href="/Gestao/EditarEstoque/@dados.Id">Editar</a>
+
+                        <form asp-controller="Estoque" asp-action="Deletar" style="display:inline;">
+                            <input type="hidden" name="id" id="id" value="@dados.Id" />
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+
+                </tr>
+            }
+        </tbody>
+    </table>

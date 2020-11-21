@@ -1,0 +1,33 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (max-width: 450px) {
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        margin-top: 2px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-left: 5px;
+        white-space: nowrap;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.bg-light {
+    background-color:#dee2e6!important;
+}
+
+.nav-link{
+    color: #100f0f!important;
+}

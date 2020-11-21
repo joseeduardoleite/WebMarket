@@ -1,0 +1,80 @@
+﻿@model WebMarket.DTO.ProdutoDTO
+
+@{
+    ViewData["Title"] = "EditarProduto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Editar Produto</h2>
+<hr />
+
+
+<div class="container">
+
+
+    <form class="form-horizontal" asp-controller="Produto" asp-action="Atualizar" method="POST">
+        <input type="hidden" asp-for="Id" />
+
+
+        <div class="form-group">
+            <label for="nome" asp-for="Nome">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Nome do Produto" />
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="Nome"></span> </small>
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label for="categoria" asp-for="Nome">Nome da Categoria</label>
+                <div class="form-group">
+                    <select class="selectpicker form-control" id="categoria" asp-for="CategoriaID" asp-items="@(new SelectList(@ViewBag.Categorias,"Id", "Nome"))" data-live-search="true"></select>
+                    <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="CategoriaID"></span> </small>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label for="fornecedor" asp-for="Nome">Nome do Fornecedor</label>
+                <div class="form-group">
+                    <select class="selectpicker form-control" data-show-subtext="true" id="fornecedor" asp-for="FornecedorID" asp-items="@(new SelectList(@ViewBag.Fornecedor,"Id", "Nome"))" data-live-search="true"></select>
+                    <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="FornecedorID"></span> </small>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="precocusto" asp-for="PrecoDeCustoString">Preço de Custo</label>
+            <input type="text" asp-for="PrecoDeCustoString" class="form-control" id="precocusto" step="any" placeholder="20.50" />
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="PrecoDeCustoString"></span> </small>
+        </div>
+
+        <div class="form-group">
+            <label for="precovenda" asp-for="PrecoDeVendaString">Preço de Venda</label>
+            <input type="text" asp-for="PrecoDeVendaString" class="form-control" id="precovenda" step="any" placeholder="10.50" />
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="PrecoDeVendaString"></span> </small>
+        </div>
+
+        <div class="form-group">
+            <label for="medicao" asp-for="Medicao">Medição</label>
+            <select class="form-control" asp-for="Medicao">
+                <option value="0">Litro</option>
+                <option value="1">kilo</option>
+                <option value="2">unidade</option>
+            </select>
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="Medicao"></span> </small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Atualizar</button>
+    </form>
+
+</div>
+
+
+
+@section scriptgeral {
+    <script>
+        $(document).ready(function () {
+            $("#precocusto").mask("#.##0.00", { reverse: true });
+            $("#precovenda").mask("#.##0.00", { reverse: true });
+        });
+    </script>
+}

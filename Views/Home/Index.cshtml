@@ -1,0 +1,235 @@
+﻿@{
+    Layout = "";
+}
+
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Itamar Souza">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Son Market - Sistema para Supermercado</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="~/css/form-customizado.css" rel="stylesheet">
+    <link href="~/css/form-validation.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <style type="text/css">
+        html {
+            /*overflow-y:hidden;*/
+            overflow-x:hidden;        
+        }
+        .mb-0, .my-0 {
+            color: #dc3545;
+        }
+    </style>
+
+</head>
+
+
+<body class="bg-light">
+
+
+
+    <div class="p-1 text-center">
+        <span class="text-muted">SonMarket</span>
+        <img class="d-block mx-auto mb-4" src="~/img/logo.png" alt="" width="72" height="72">
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3 p-5 order-md-1 mb-4">
+
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Produto:</span>
+            </h4>
+
+            <div class="input-group">
+                <input type="number" class="form-control" id="codProduto" placeholder="Código..">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary" id="pesquisar">Pesquisar</button>
+                </div>
+            </div>
+
+
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Informações</span>
+            </h4>
+
+            <ul class="list-group mb-3">
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="campoNomeProduto">...</h6>
+                        <small class="text-muted">Nome do Produto</small>
+                    </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="campoNomeCategoria">...</h6>
+                        <small class="text-muted">Categoria do Produto</small>
+                    </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="CampoNomeFornecedor">...</h6>
+                        <small class="text-muted">Fornecedor do Produto</small>
+                    </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0" id="CampoPreco">...</h6>
+                        <small class="text-muted">Preço do Produto</small>
+                    </div>
+                </li>
+
+                <form class="needs-validation" id="produtoForm" novalidate>
+
+                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <div class="text-success">
+                            <h6 class="my-0">Quantidade</h6>
+                            <label for="firstName"></label>
+                            <input type="number" class="form-control" min="1" id="quantidade" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                                Quantidade do produto e obrigatório!
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <button class="btn btn-success btn-lg" id="btnGravar" type="submit">
+                            Confirmar <i class="fas fa-save"></i>
+                        </button>
+                    </li>
+
+                </form>
+
+            </ul>
+        </div>
+
+
+        <div class="col-md-8 order-md-2">
+
+            <div id="listagem" class="row">
+
+                <div class="col-md-12">
+
+
+                    <table class="table table-borderless table-dark" id="compras">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="table-active">Name</th>
+                                <th scope="col" class="table-active">Qtd</th>
+                                <th scope="col" class="table-active">Preço</th>
+                                <th scope="col" class="table-active">Total</th>
+                                <th scope="col" class="table-active">Remover</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="col-sm-8">
+                <button class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" id="btnGravar" type="submit">
+                    Finalizar Compra <i class="fas fa-check-double"></i>
+                </button>
+                <button class="btn btn-danger btn-lg" id="btnGravar" type="submit">
+                    Cancelar compra <i class="fas fa-cart-arrow-down"></i>
+                </button>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Finalizar venda</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h2>Total: <span id="totalvenda">00</span> </h2>
+                    <hr>
+                    <p>Valor pago:</p>
+                    <input type="number" placeholder="12.76" class="form-control" id="valorpago">
+                    <p>Troco:</p>
+                    <input type="number" placeholder="12.76" disabled class="form-control">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="posvenda">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                    <div class="prevenda">
+                        <button type="button" class="btn btn-success" id="finalizarVendaBtn">Finalizar venda</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 Web Market - Sistema para Supermercado</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/form-validation.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="~/js/form-dataTables.js"></script>
+    <script src="~/js/form-ajustabtn.js"></script>
+    <script src="~/js/form-frente-caixa.js"></script>
+
+
+
+
+</body>
+</html>

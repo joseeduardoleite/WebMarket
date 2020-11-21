@@ -1,0 +1,25 @@
+﻿@model WebMarket.DTO.CategoriaDTO
+@{
+    ViewData["Title"] = "NovaCategoria";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Nova Categoria</h2>
+<hr />
+
+<div class="container">
+
+
+    <form class="form-horizontal" asp-controller="Categoria" asp-action="Salvar" method="POST">
+        <input type="hidden" asp-for="Id" value="0" />
+
+        <div class="form-group">
+            <label for="nome" asp-for="Nome">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Nome da Categoria" />
+            <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="Nome" ></span> </small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+
+</div>
